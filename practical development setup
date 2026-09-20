@@ -1,0 +1,85 @@
+Task 1: Flutter & Dart Environment Setup
+1. Open your terminal, run `flutter doctor` to verify your installation, and paste the output summary into your document.
+[√] Flutter (Channel stable, 3.47.4, on Microsoft Windows [Version 10.0.26200.9457], locale en-KE)
+[√] Windows Version (Windows 11 or higher, 25H2, 2009)
+[√] Android toolchain - develop for Android devices (Android SDK version 36.0.0)
+[√] Chrome - develop for the web
+[√] Visual Studio - develop Windows apps (Visual Studio Community 2026 18.10.1)
+[√] Connected device (3 available)
+[√] Network resources
+
+• No issues found!
+
+2. Initialize a new Flutter application named `my_first_app` using the terminal, navigate into the project folder, and list all available target devices using `flutter devices`.
+Flutter run
+
+Flutter devices
+
+3. Answer the following conceptual question:
+   - What is the difference between 'Hot Reload' and 'Hot Restart' in Flutter? Explain when a developer should use each. 
+Hot Reload injects updated source code into the already running Dart Virtual Machine without losing the app's current state. Widget trees are rebuilt with your changes but variables, navigation stack and scroll position stay intact. It is used it for small, fast iterations like tweaking UI layout, colors, text or fixing a minor logic bug when you don't need the app to restart from scratch.
+Hot Restart destroys the current app state entirely and restarts the app from main(), reloading the whole Dart code. It's slower than Hot Reload but necessary when changes can't be picked up incrementally for example changes to main(), global variables/state initialization, enums, generic types or if Hot Reload produces odd/inconsistent behavior after a change.
+
+Task 2: MySQL Database Management
+ 1. Log into your local MySQL server as root via the terminal/command line and execute SQL commands to:
+   - Create a database named `school`.
+   - Create a `students` table with fields: `id` (AUTO_INCREMENT PRIMARY KEY), `name` (VARCHAR 100), `email` (VARCHAR 150 UNIQUE), and `enrolled_on` (DATE).
+   - Insert two sample student records.
+   - Run a query to retrieve all records from the `students` table.
+CREATE DATABASE school;
+USE school;
+CREATE TABLE students (
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR (100),
+email VARCHAR (150) UNIQUE,
+enrolled_on DATE
+);
+INSERT INTO students (name, email, enrolled_on)
+VALUES 
+    ('David Kiptoo', 'david.kiptoo@example.com', '2026-03-12'),
+    ('Faith Nekesa', 'faith.nekesa@example.com', '2026-03-15'),
+SELECT * FROM students;
+2. Paste the SQL script used into your document alongside a screenshot or terminal output showing the results of your `SELECT *` query.
+
+3. Security Reflection: Explain why using the `root` database account for direct application backend connections is poor security practice, and detail the SQL commands required to create a dedicated, least-privileged application user. 
+It is because ‘root’ has extensive privileges across the database server. If the application's credentials are leaked or the application is compromised, an attacker could potentially modify or delete databases, create users, change permissions, or access unrelated data. 
+
+CREATE USER 'school_app'@'localhost'
+IDENTIFIED BY 'StrongPasswordHere';
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON school_db.*
+TO 'school_app'@'localhost';
+SHOW GRANTS FOR 'school_app'@'localhost';
+
+Task 3: Python Environment & Dependency Isolation
+1. Create a project directory named `python_setup_lab`.
+2. Set up and activate an isolated virtual environment named `venv` inside the folder.
+3. Install the `requests` library, verify its installation in your package list, and export the environment configuration to a `requirements.txt` file.
+4. Copy and paste the exact terminal commands used for creation, activation, package installation, and export into your document.
+Creation
+mkdir python_setup_lab
+Activation
+source venv/scripts/activate
+Package installation
+pip install requests
+
+$ cat requirement.txt
+certifi==2026.7.22
+charset-normalizer==3.5.1
+idna==3.20
+requests==2.34.2
+urllib3==2.8.0
+(venv)
+
+Task 4: VS Code Workspace Configuration
+1. Install the required extensions in VS Code: `Flutter`, `Dart`, `Python`, `Pylance`, and `MySQL`.
+2. Configure VS Code to select and use the Python interpreter located inside your `python_setup_lab/venv` directory.
+3. Take a single, full-screen screenshot of your VS Code window displaying:
+   - The active Extensions panel showing installed plugins.
+   - The integrated terminal open with the `(venv)` prompt active.
+   - The bottom status bar showing the selected Python interpreter environment.
+
+ 
+
+
+
